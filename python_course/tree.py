@@ -25,13 +25,14 @@ def build_tree(level=0, print_pattern=(0,)) -> None:
 
 def print_tree_line(last_file: int, print_pattern: tuple, file_name: str) -> None:
     p_dict = ['    ', '│   ']
-    [print(p_dict[key], end='') for key in print_pattern]
+    [print(p_dict[key], end='') for key in print_pattern[1:]]
     print(('├── ' if last_file else '└── ') + file_name)
 
 
 if __name__ == '__main__':
+    print('.')
     build_tree()
-    print(f'{count_dir} directories, {count_files} files')
+    print(f'\n{count_dir} directories, {count_files} files')
 
 
     def test(path: str):
