@@ -50,6 +50,10 @@ class TestCalculator(unittest.TestCase):
         self.assertTrue(self.calculate(256) == bad_object_type)
         self.assertTrue(self.calculate(['5+5']) == bad_object_type)
 
+    def test_zero_division(self):
+        """if you enter some / zero -> 'Zero division error'"""
+        self.assertEqual(self.calculate('2/0'), 'Zero division error')
+        self.assertEqual(self.calculate('2/10/0'), 'Zero division error')
 
 if __name__ == '__main__':
     unittest.main()
