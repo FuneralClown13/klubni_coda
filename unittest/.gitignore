@@ -1,0 +1,5 @@
+some_smart_f.py
+test_some_smart_f.py
+.idea/
+__pycache__/
+venv/
