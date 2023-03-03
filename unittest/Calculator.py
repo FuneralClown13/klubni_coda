@@ -8,6 +8,7 @@ def calculate(expression: str):
 
     expression = expression.replace('/', '$').replace(' ', '')
     lst_line = findall(r'[0-9]+\.?[0-9]*|[\*+@$-.]', expression)
+
     if findall(r'[^.0123456789+\-*$]', expression):
         return 'Bad request'
     elif not isinstance(expression, str):
