@@ -42,10 +42,14 @@ async def start_translate(text_list):
 
     return ru_text
 
+
 def translate(text):
+    global start_time
     if (time.time() - start_time) > 86400:
+        start_time = time.time()
         get_IAM_TOKEN()
     return asyncio.run(start_translate(text))
+
 
 if __name__ == '__main__':
     start = time.time()
