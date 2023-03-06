@@ -18,7 +18,7 @@ async def get_city_weather(city):
             print(resp.status)
             if resp.status == 404 and city in cities:
                 del_city_if_404(city)
-                cities = '@'.join(get_cities_list())
+                 cities = '@'.join(get_cities_list())
                 return ''
             if resp.status == 200 and city not in cities:
                 set_city_in_list(city)
