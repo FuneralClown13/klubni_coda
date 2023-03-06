@@ -1,3 +1,4 @@
+import time
 from asyncio import run, create_task
 from aiohttp import ClientSession
 import json
@@ -8,7 +9,7 @@ async def __get_some_advice():
     async with ClientSession() as session:
         async with session.get(url) as response:
             advice = json.loads(await response.text())
-            return advice['slip']['advice']
+            return advice['slip']['advice'], advice['slip']['id']
 
 
 async def __tasks_builder(amount_advice: int) -> list[str]:
@@ -26,4 +27,6 @@ def main_get_advice(amount_advice: int):
 
 
 if __name__ == '__main__':
+    start = time.time()
     print(main_get_advice(5))
+    print(time.time() - start)

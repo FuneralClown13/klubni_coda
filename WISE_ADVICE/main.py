@@ -2,10 +2,13 @@ from get_some_advice import main_get_advice
 from yandex_translate import translate
 import logging
 
-
+advice_id = []
 def get_advice(amount_advice: int) -> list[str]:
     logging.info('start get_advice')
-    advice = main_get_advice(amount_advice)
+    global advice_id
+    advice_res = main_get_advice(amount_advice)
+    advice = [advice_res[i][0] for i in range(len(advice_res))]
+    advice_id = [advice_res[i][1] for i in range(len(advice_res))]
     logging.info(f'complete get_advice\nresult: {advice}')
     return advice
 
@@ -27,8 +30,8 @@ def print_advice(ru_advice: list[str]) -> None:
 
 def ret_advice(ru_advice: list[str]) -> str:
     text_advice = ''
-    for i, advice in enumerate(ru_advice):
-        text_advice += f'Совет {i+1}:\n{advice}\n\n'
+    for i, advice in zip(advice_id, ru_advice):
+        text_advice += f'Совет {i}:\n{advice}\n\n'
     return text_advice
 
 def main(amount_advice=1):

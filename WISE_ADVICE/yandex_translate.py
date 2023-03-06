@@ -1,3 +1,6 @@
+import asyncio
+import time
+from aiohttp import ClientSession
 import requests
 from dotenv import load_dotenv
 import os
@@ -8,27 +11,44 @@ folder_id = os.getenv('folder_id')
 target_language = 'ru'
 
 
-def translate(texts: list[str]):
-    if not texts:
-        return 'Empty text'
-
+async def get_translate(text: str):
     body = {
         "targetLanguageCode": target_language,
-        "texts": texts,
+        "texts": text,
         "folderId": folder_id,
     }
-
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Bearer {0}".format(IAM_TOKEN)
     }
+    async with ClientSession() as session:
+        async with session.post('https://translate.api.cloud.yandex.net/translate/v2/translate',
+                                json=body,
+                                headers=headers) as resp:
+            advice_json = await resp.json()
+            return advice_json['translations'][0]['text']
 
-    response = requests.post('https://translate.api.cloud.yandex.net/translate/v2/translate',
-                             json=body,
-                             headers=headers
-                             )
-    resp_json = response.json()
-    return [resp_json['translations'][i]['text'] for i in range(len(texts))]
+
+async def start_translate(text_list):
+    tasks = []
+    ru_text = []
+    for text in text_list:
+        tasks.append(asyncio.create_task(get_translate(text)))
+    for task in tasks:
+        ru_text.append(await task)
+
+    return ru_text
+
+def translate(text):
+    return asyncio.run(start_translate(text))
 
 if __name__ == '__main__':
-    print(translate(['Hello', 'world']))
+    start = time.time()
+    ex = ['Life is better when you sing about bananas.',
+          'Identify sources of happiness.',
+          "Don't let the bastards grind you down.",
+          'Do, or do not. There is no try.',
+          'If you think your headphones are dying, check the socket for fluff with a straightened paperclip.']
+
+    print(asyncio.run(start_translate(ex)))
+    print(time.time() - start)
