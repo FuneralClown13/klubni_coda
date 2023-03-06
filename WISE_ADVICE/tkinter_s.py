@@ -1,8 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from main import main
+from get_IAM_TOKEN import get_IAM_TOKEN
 
+get_IAM_TOKEN()
 count = 1
+
 
 
 def clicked():

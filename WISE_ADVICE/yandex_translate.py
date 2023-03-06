@@ -4,11 +4,14 @@ from aiohttp import ClientSession
 import requests
 from dotenv import load_dotenv
 import os
+from get_IAM_TOKEN import get_IAM_TOKEN
 
 load_dotenv()
 IAM_TOKEN = os.getenv('IAM_TOKEN')
 folder_id = os.getenv('folder_id')
 target_language = 'ru'
+
+start_time = time.time()
 
 
 async def get_translate(text: str):
@@ -40,6 +43,8 @@ async def start_translate(text_list):
     return ru_text
 
 def translate(text):
+    if (time.time() - start_time) > 86400:
+        get_IAM_TOKEN()
     return asyncio.run(start_translate(text))
 
 if __name__ == '__main__':
