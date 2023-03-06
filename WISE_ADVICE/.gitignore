@@ -1,0 +1,6 @@
+.env
+venv/
+__pycache__/
+.idea/
+yandex.txt
+py_log.log
