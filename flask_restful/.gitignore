@@ -1,0 +1,7 @@
+.env
+__pycache__/
+.idea/
+pgsql.py
+test_client.py
+add_some_in_db.py
+flask_app.py

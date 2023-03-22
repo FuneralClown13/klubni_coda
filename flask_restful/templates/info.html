@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Info
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <table class="table">
+          <caption>List of books</caption>
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Book</th>
+            <th scope="col">Author</th>
+            <th scope="col">Count</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in db %}
+        <tr>
+            <td><p class="card-title">{{ book[0] }}</td>
+            <td><p class="card-text">{{ book[1] }}</p></td>
+            <td><p class="card-text">{{ book[2] }}</p></td>
+            <td><p class="card-text">{{ book[3] }} шт</p></td>
+            <td><p class="card-text">{{ book[4] }} руб</p></td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

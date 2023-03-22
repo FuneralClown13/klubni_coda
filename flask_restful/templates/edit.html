@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit
+{% endblock %}
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Edit "{{ data[1] }}" id: {{ data[0] }}</h1>
+    <form method="post">
+        <input type="text" name="book" id="book" class="form-control" value="{{ data[1] }}"><br>
+        <input type="text" name="author" id="author" class="form-control" value="{{ data[2] }}"><br>
+        <input type="number" name="count" id="count" class="form-control" value="{{ data[3] }}"><br>
+        <input type="number" name="price" id="price" class="form-control" value="{{ data[4] }}"><br>
+
+        <textarea name="annotation" id="annotation" class="form-control">{{ data[5] }}</textarea><br>
+
+        <input type="submit" class="btn btn-success" value=" Add ">
+    </form>
+</div>
+{% endblock %}

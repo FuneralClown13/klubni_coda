@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create
+{% endblock %}
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Add book in db</h1>
+    <form method="post">
+        <input type="text" name="book" id="book" class="form-control" placeholder="Book"><br>
+        <input type="text" name="author" id="author" class="form-control" placeholder="Author"><br>
+        <input type="number" name="count" id="count" class="form-control" placeholder="Count"><br>
+        <input type="number" name="price" id="price" class="form-control" placeholder="Price"><br>
+
+        <textarea name="annotation" id="annotation" class="form-control" placeholder="Annotation"></textarea><br>
+
+        <input type="submit" class="btn btn-success" value=" Add ">
+    </form>
+</div>
+{% endblock %}
